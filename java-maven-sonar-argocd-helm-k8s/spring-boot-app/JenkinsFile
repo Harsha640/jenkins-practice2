@@ -9,7 +9,7 @@ pipeline {
     stage('Checkout') {
       steps {
         sh 'echo passed'
-        //git branch: 'main', url: 'https://github.com/Harsha640/Jenkins-practice1.git'
+        //git branch: 'main', url: 'https://github.com/Harsha640/Jenkins-practice2.git'
       }
     }
     stage('Build and Test') {
