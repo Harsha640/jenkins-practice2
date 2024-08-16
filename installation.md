@@ -10,11 +10,12 @@
 - minikube
 - Argo CD
 
-### Installation on AWS EC2 Instance
+## Installation on AWS EC2 Instance
 
 - Go to AWS Console
 - Instances(running)
 - Launch instances
+- add inbound traffic rule
 
 **Note: ** By default, Jenkins will not be accessible to the external world due to the inbound traffic restriction by AWS. Open port 8080 in the inbound traffic rules as show below.
 
