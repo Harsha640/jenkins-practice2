@@ -7,13 +7,10 @@
 - Docker
 - Docker Hub
 - Shell script
+- minikube
 - Argo CD
-- Kubernetes
 
-### Installation on EC2 Instance
-
-
-### AWS EC2 Instance
+### Installation on AWS EC2 Instance
 
 - Go to AWS Console
 - Instances(running)
@@ -160,37 +157,35 @@ http://<ec2-instance-public-ip>:8080/restart
 
 The docker agent configuration is now successful.
 
-## Installing the minikube cluster 
-To remove the old files
-```
-minikube delete
-```
-To start the minikube
-```
-minikube start --memory=3920
-```
-
 ## Argo CD
 
-Install on Kubernetes
-Install Operator Lifecycle Manager (OLM), a tool to help manage the Operators running on your cluster.
-```
-curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releases/download/v0.28.0/install.sh | bash -s v0.28.0
-```
-Copy to Clipboard
-Install the operator by running the following command:What happens when I execute this command?
-```
-kubectl create -f https://operatorhub.io/install/argocd-operator.yaml
-```
-Copy to Clipboard
-This Operator will be installed in the "operators" namespace and will be usable from all namespaces in the cluster.
+To start the argoCD
 
-After install, watch your operator come up using next command.
 ```
-kubectl get csv -n operators
+minikube start
+
+Creating a name space 
+
+kubectl create namespace argocd4
+
+kubectl apply -n argocd4 -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+kubectl port-forward svc/argocd-server -n argocd4 8080:443
 ```
-Copy to Clipboard
-To use it, checkout the custom resource definitions (CRDs) introduced by this operator to start using it.
+open the new tab and enter the below command
+```
+kubectl -n argocd4 get secret argocd-initial-admin-secret -o yaml
+
+copy the file something look like this and give the command like
+
+echo dXNlcjpwYXNzd29yZA== | base64 --decode
+
+```
+
+Argo CD user name: admin
+pass: copy from the terminal.
+
+
 
 
 ==============================================================================
